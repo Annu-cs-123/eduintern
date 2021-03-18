@@ -37,7 +37,7 @@ app.post('/city',(req,res) =>{
     })
   });
   app.get('/getCity',(req,res) =>{
-      db.collection('cities').find().toArray((error,result)=>{
+      db.collection('location').find().toArray((error,result)=>{
         if(error) throw error;
         res.status(200).send(result) 
       })
