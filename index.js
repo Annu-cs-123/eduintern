@@ -13,6 +13,17 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
+
+MongoClient.connect(mongourl,(err,connection) => {
+  if(err) console.log(err);
+  db = connection.db('internshipprogram');
+
+  app.listen(port,(err) => {
+    if(err) throw err;
+    console.log(`Server is running on port ${port}`)
+  })
+})
+
 //health Check
 app.get('/',(req,res) => {
     res.send("Health Ok");
@@ -116,12 +127,4 @@ app.get('/orders',(req,res) => {
 
 
 //connection with mongo serer
-MongoClient.connect(mongourl,(err,connection) => {
-  if(err) console.log(err);
-  db = connection.db('internshipprogram');
 
-  app.listen(port,(err) => {
-    if(err) throw err;
-    console.log(`Server is running on port ${port}`)
-  })
-})
